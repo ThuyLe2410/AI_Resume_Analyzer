@@ -1,10 +1,12 @@
-import { prepareInstructions } from "constants";
+
 import { useState } from "react";
 import FileUploader from "~/components/FileUploader";
 import Navbar from "~/components/Navbar";
 import { convertPdfToImage } from "~/lib/pdf2img";
 import { usePuterStore } from "~/lib/puter";
 import { generateUUID } from "~/lib/utils";
+import {AIResponseFormat, prepareInstructions } from "../../constants/index";
+
 
 export default function upload() {
   const { auth, isLoading, fs, ai, kv } = usePuterStore();
@@ -65,7 +67,7 @@ export default function upload() {
     await kv.set(`resume: ${uuid}`, JSON.stringify(data));
 
     setStatusText('Analyzing...');
-    const feedback = await ai.feedback(uploadFile.path, prepareInstructions({jobTitle, jobDescription }) )
+    const feedback = await ai.feedback(uploadFile.path, prepareInstructions({jobTitle, jobDescription,AIResponseFormat }) )
     if (!feedback) return setStatusText('Error: Failed to analyze resume');
     const feedbackText = typeof feedback.message.content === 'string' ? feedback.message.content : feedback.message.content[0].text;
     data.feedback = JSON.parse(feedbackText);
