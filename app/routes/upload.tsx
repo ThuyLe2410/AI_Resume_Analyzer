@@ -6,6 +6,7 @@ import { convertPdfToImage } from "~/lib/pdf2img";
 import { usePuterStore } from "~/lib/puter";
 import { generateUUID } from "~/lib/utils";
 import {AIResponseFormat, prepareInstructions } from "../../constants/index";
+import { useNavigate } from "react-router";
 
 
 export default function upload() {
@@ -13,6 +14,7 @@ export default function upload() {
   const [isProcessing, setIsProcessing] = useState(false);
   const [statusText, setStatusText] = useState("");
   const [file, setFile] = useState<File | null>(null);
+  const navigate = useNavigate()
 
   const handleFileSelect = (file: File | null) => {
     setFile(file);
@@ -74,7 +76,8 @@ export default function upload() {
     await kv.set(`resume:${uuid}`, JSON.stringify(data));
 
     setStatusText('Analysis complete, redirecting...')
-    console.log(data)
+    console.log(data);
+    navigate(`/resume/${uuid}`)
   };
 
   return (
