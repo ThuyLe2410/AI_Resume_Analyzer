@@ -1,6 +1,7 @@
 import React from 'react'
+import type { Feedback } from 'types'
 
-const Details = () => {
+const Details = ({feedback}:{feedback:Feedback}) => {
   return (
     <div>
       
