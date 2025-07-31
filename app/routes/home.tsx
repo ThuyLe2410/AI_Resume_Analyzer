@@ -1,8 +1,7 @@
 import type { Route } from "./+types/home";
-import { Welcome } from "../welcome/welcome";
 import Navbar from "~/components/Navbar";
 import { resumes } from "../../constants";
-import { callbackify } from "util";
+
 import ResumeCard from "~/components/ResumeCard";
 
 export function meta({}: Route.MetaArgs) {
