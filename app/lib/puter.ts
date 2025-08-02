@@ -129,6 +129,7 @@ export const usePuterStore = create<PuterStore>((set, get) => {
       const isSignedIn = await puter.auth.isSignedIn();
       if (isSignedIn) {
         const user = await puter.auth.getUser();
+        console.log('user', user)
         set({
           auth: {
             user,
@@ -223,6 +224,7 @@ export const usePuterStore = create<PuterStore>((set, get) => {
 
     try {
       const user = await puter.auth.getUser();
+      console.log('user', user)
       set({
         auth: {
           user,
